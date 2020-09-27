@@ -1,0 +1,36 @@
+오라클 드라이버는 아래 링크를 클릭해 다운로드 할수 있음
+https://www.oracle.com/technetwork/apps-tech/jdbc-112010-090769.html
+
+톰캣에서 ConnectionPool 기능을 사용하려면 이 기능을 제공하는 DBCP 라이브러리를 따로 내려받아야함
+http://www.java2s.com/Code/Jar/t/Downloadtomcatdbcp7030jar.htm
+tomcat-dbcp-7.0.30.jar 와 ojdbc6.jar 두개 파일을 WEB-INF - lib 에 위치 시킨다.
+
+이클립스에서 톰캣 DataSource 설정 
+
+서버,톰캣  context.xml 파일에서 해당 문장을 추가 한다.
+
+<Resource 
+    name="jdbc/oracle"  
+    auth="Container" 
+    type="javax.sql.DataSource" 
+    driverClassName="oracle.jdbc.OracleDriver"
+    url="jdbc:oracle:thin:@localhost:1521:XE"
+    username="JSP"
+    password="gusxo11"
+    maxActive="50"
+    maxWait="-1"
+    />
+
+
+ServletContext 클래스는 톰캣 컨테이너 실행시 각 컨텍스트(웹 애플리케이션) 마다 한개의 servletcontext 객체를생성
+
+10장의 기능을 잘 학습하면 고급기능을 웹페이지에 구현 가능.
+context 에 바인딩되면 모든브라우저에서 사용가능하고
+session 에 바인딩 되면 해당브라우저에서만 사용가능하고 
+request 에 바인딩되면 요청/응답으로만 가능하다.
+
+
+URL패턴은 서블릿 매핑 시 사용되는 가상의 이름이고 
+- 클라이언트가 브라우저에서 요청할때 사용되며 반드시 /(슬래시) 로 시작해야함
+- 이름까지 일치하거나, 디렉터리까지 일치하거나, 확장자만 일치하는 3가지로 구분함
+
