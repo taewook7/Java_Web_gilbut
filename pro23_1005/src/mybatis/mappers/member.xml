@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--member.xml 의 네임스페이스를 지정합니다. -->
+<mapper namespace="mapper.member">
+
+	
+	<!-- SQL문을 실행한 후 반환되는 레코드들을 <typeAlias> 태그에서 지정한 memverVO 빈에 저장합니다. -->
+	<!--  
+	<resultMap id="memResult" type="memberVO">
+		<result property="id" column="id" />
+		<result property="pwd" column="pwd"></result>
+		<result property="name" column="name"></result>
+		<result property="email" column="email"></result>
+		<result property="joinDate" column="joinDate"></result>
+		
+	</resultMap>
+	-->
+	
+	
+	<select id="selectAllMemberList" resultMap="memResult">
+		<![CDATA[
+		select * from t_member order by joinDate desc
+		]]>
+	</select>
+	<!--  MemberDAO 에서 접근 시 사용할 SQL 문의 id를 지정합니다. -->
+	<!--  resultType 속성을 문자열로 지정해 SQL문으로 조회한 이름(문자열)을 호출한 메서드로 반환합니다. -->
+	<select id="selectName" resultType="String">
+	<![CDATA[
+	select name from t_member where id='xodnr'
+	]]>
+	
+	</select>	
+	
+	<select id="selectPwd" resultType="int">
+	<![CDATA[
+		select pwd from t_member where id='gusxo11'
+	]]>
+	</select>
+	
+	
+	<resultMap id="memResult" type="java.util.HashMap">
+		<result property="id"  column="id" />
+		<result property="pwd"  column="pwd" />
+		<result property="name"  column="name" />
+		<result property="email"  column="email" />
+		<result property="joinDate"  column="joinDate" />
+	</resultMap>
+	
+	<!-- MemberDAO 에서 호출하는 id 를 지정합니다. / 조회되는 한개의 레코드를 memberVO 에 저장합니다. -->
+	<!-- MemberDAO 에서 SQL문 호출 시 전달 되는 매개변수의 데이터 타입을 지정합니다. -->
+	<select id="selectMemberById" resultType="memberVO" parameterType="String" >
+		
+		<!-- MemberDAO에서 메서드를 호출하면서 parameterType 으로 전달된 매개변수 이름을 select문의 id의 조건값으로 사용 -->
+		<![CDATA[
+			select * from t_member where id=#{id} 
+		]]>
+	</select>
+
+	<select id="selectMemberByPwd" resultMap="memResult" parameterType="int" >
+		<!--  SQL문 실행시 매개변수 이름을 pwd 의 조건값으로 사용합니다. -->
+		<![CDATA[
+		select * from t_member where pwd=#{pwd} 
+		]]>
+		
+	</select>	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
