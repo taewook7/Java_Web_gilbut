@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	
+	<!--  애플리케이션에서 SQL문으로 값을 전달하거나 마이바티스에서 DBMS로 SQL문 실행 시 반환되는 레코드를 저장하는
+	용도로 사용하기 위한 빈인 memberVO 빈을 생성합니다. -->
+	<typeAliases>
+		<!--  DAO에서 SQL문으로 값을 전달할 때 또는 SQL문을 실행한후 가져온 값을 DAO로 전달할때 사용할 빈을 생성합니다. -->
+		<typeAlias type="com.spring.ex01.MemberVO" alias="memberVO" />	
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<!--  데이터베이스 연결 설정합니다. -->
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="JDBC:oracle:thin:@localhost:1521:XE" />
+				<property name="username" value="JSP" />
+				<property name="password" value="gusxo11" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	
+	<mappers>
+		<!-- 회원 기능 관련 SQL문이 있는 member.xml을 읽어들입니다. 이때 반드시 지정한 패키지 이름과 일치 해야합니다. -->
+		<mapper resource="mybatis/mappers/member.xml" />
+	
+	</mappers>
+	
+	
+	
+	
+	
+	
+</configuration>
